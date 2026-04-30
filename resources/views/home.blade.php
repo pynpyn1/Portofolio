@@ -1,211 +1,144 @@
-    <!doctype html>
-    <html lang="id">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Beranda | Rahmad Alvian</title>
-        
-        <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
-        
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-        <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<!doctype html>
+<html lang="id">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Beranda | Rahmad Alvian</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
-        <style>
-            :root {
-                /* Palette: Deep Navy & Vivid Sky */
-                --bg-body: #0f172a;       /* Navy Gelap */
-                --bg-card: #1e293b;       /* Navy Medium */
-                
-                /* WARNA TEKS LEBIH HIDUP */
-                --text-main: #ffffff;     /* Putih Murni (Judul) */
-                --text-body: #e2e8f0;     /* Abu Terang (Isi Paragraf - Jauh lebih terang) */
-                --text-dim: #94a3b8;      /* Abu Sedang (Hanya untuk label kecil) */
-                
-                --accent-color: #38bdf8;  /* Biru Langit Cerah */
-                --accent-glow: 0 0 20px rgba(56, 189, 248, 0.4);
-            }
+    <style>
+        :root {
+            --bg-body: #050816;
+            --bg-card: rgba(17, 25, 40, 0.75);
+            --accent-cyan: #00f2ff;
+            --accent-purple: #7000ff;
+            --text-main: #ffffff;
+            --text-body: #94a3b8;
+        }
 
-            body {
-                background-color: var(--bg-body);
-                color: var(--text-body);  /* Menggunakan warna terang untuk default */
-                font-family: 'Quicksand', sans-serif;
-                padding-bottom: 120px;
-            }
+        body {
+            background-color: var(--bg-body);
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(112, 0, 255, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(0, 242, 255, 0.05) 0%, transparent 40%);
+            color: var(--text-body);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            padding-bottom: 120px;
+        }
 
-            h1, h2, h3, h4, h5, h6 {
-                color: var(--text-main); /* Judul selalu putih bersih */
-            }
+        .text-neon {
+            background: linear-gradient(to right, var(--accent-cyan), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 800;
+        }
 
-            /* --- CARD STYLE --- */
-            .lofi-card {
-                background-color: var(--bg-card);
-                border-radius: 30px;
-                padding: 2.5rem;
-                border: 1px solid rgba(255, 255, 255, 0.1); /* Border lebih tegas */
-                box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-                transition: transform 0.3s ease;
-            }
+        .lofi-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(12px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: 0.3s;
+        }
 
-            .lofi-card:hover {
-                transform: translateY(-5px);
-                border-color: var(--accent-color);
-            }
+        .lofi-card:hover {
+            border-color: var(--accent-cyan);
+            transform: translateY(-5px);
+        }
 
-            /* --- TOMBOL --- */
-            .btn-chill {
-                background-color: var(--accent-color);
-                color: #0f172a; /* Teks tombol gelap agar kontras */
-                border-radius: 50px;
-                padding: 12px 30px;
-                font-weight: 700;
-                border: none;
-                box-shadow: var(--accent-glow);
-                transition: 0.3s;
-            }
-            .btn-chill:hover {
-                background-color: #7dd3fc;
-                color: #0f172a;
-                transform: scale(1.05);
-                box-shadow: 0 0 30px rgba(56, 189, 248, 0.6);
-            }
-            
-            .btn-chill-outline {
-                background: transparent;
-                border: 2px solid var(--accent-color);
-                color: var(--accent-color);
-                border-radius: 50px;
-                padding: 10px 28px;
-                font-weight: 700;
-                transition: 0.3s;
-            }
-            .btn-chill-outline:hover {
-                background: var(--accent-color);
-                color: #0f172a;
-                box-shadow: var(--accent-glow);
-            }
+        .profile-container { position: relative; z-index: 1; }
+        .profile-container::after {
+            content: ""; position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -50%); width: 300px; height: 300px;
+            background: var(--accent-purple); filter: blur(80px); opacity: 0.3; z-index: -1;
+        }
 
-            /* --- SKILL PILLS --- */
-            .skill-pill {
-                background: rgba(56, 189, 248, 0.15); /* Background sedikit lebih tebal */
-                color: #7dd3fc; /* Teks Biru Terang */
-                padding: 8px 20px;
-                border-radius: 20px;
-                font-weight: 600;
-                font-size: 0.9rem;
-                display: inline-block;
-                margin-right: 5px; margin-bottom: 5px;
-                border: 1px solid rgba(56, 189, 248, 0.2);
-            }
+        .profile-img {
+            border: 4px solid rgba(255, 255, 255, 0.1);
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            animation: morph 6s ease-in-out infinite;
+        }
 
-            /* --- NAVIGASI FLOAT --- */
-            .chill-nav {
-                position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
-                background: rgba(30, 41, 59, 0.95);
-                backdrop-filter: blur(10px);
-                padding: 10px 20px; border-radius: 50px;
-                display: flex; gap: 15px; z-index: 1000;
-                box-shadow: 0 10px 40px rgba(0,0,0,0.5);
-                border: 1px solid rgba(255,255,255,0.15);
-            }
-            .nav-item-chill {
-                color: var(--text-dim); padding: 10px 15px; text-decoration: none; 
-                font-weight: 700; border-radius: 20px; transition: 0.3s;
-            }
-            .nav-item-chill:hover, .nav-item-chill.active {
-                color: var(--accent-color); background: rgba(56, 189, 248, 0.1);
-                text-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
-            }
+        @keyframes morph {
+            0% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
+            50% { border-radius: 50% 50% 30% 70% / 50% 30% 70% 50%; }
+            100% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
+        }
 
-            /* Foto */
-            .profile-img {
-                border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
-                border: 4px solid var(--accent-color);
-                box-shadow: 0 0 30px rgba(56, 189, 248, 0.2);
-                transition: 5s ease-in-out;
-                animation: morph 8s ease-in-out infinite;
-            }
-            @keyframes morph {
-                0% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
-                50% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
-                100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
-            }
-        </style>
-    </head>
-    <body>
+        .btn-neon {
+            background: linear-gradient(45deg, var(--accent-cyan), var(--accent-purple));
+            border: none; color: white; font-weight: 700;
+            padding: 12px 30px; border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 242, 255, 0.3); transition: 0.3s;
+        }
 
-        <div class="container pt-5" style="max-width: 900px;">
+        /* --- NAVIGASI FLOAT FIX --- */
+        .chill-nav {
+            position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
+            background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+            padding: 6px; border-radius: 20px; display: flex; gap: 4px; z-index: 9999;
+            border: 1px solid rgba(255, 255, 255, 0.1); width: auto; max-width: 95%; white-space: nowrap;
+        }
+        .nav-item {
+            color: #64748b; padding: 10px 16px; text-decoration: none; 
+            font-weight: 700; font-size: 0.85rem; border-radius: 15px; transition: 0.3s;
+        }
+        .nav-item.active { background: #ffffff; color: #000000 !important; box-shadow: 0 0 15px rgba(255, 255, 255, 0.3); }
+    </style>
+</head>
+<body>
 
-            <div class="row align-items-center g-5">
-                
-                <div class="col-lg-7 order-2 order-lg-1" data-aos="fade-up">
-                    <h1 class="display-4 fw-bold mb-3 text-white">
-                        Rahmad Alvian <br><span style="color: var(--accent-color); text-shadow: 0 0 20px rgba(56, 189, 248, 0.5);">Andrianto.</span>
-                    </h1>
-                    
-                    <p class="fs-5 mb-4" style="line-height: 1.8; color: var(--text-body);">
-                        Mahasiswa santai yang suka ngoding di tengah malam. <br>
-                        Fokus saya sekarang ada di <strong class="text-white">Web Development</strong> dan eksperimen <strong class="text-white">Home Server</strong>.
-                    </p>
-                    
-                    <div class="d-flex gap-3 mb-5">
-                        <a href="/about" class="btn-chill text-decoration-none">Tentang saya</a>
-                        <a href="https://github.com/actzy" target="_blank" class="btn-chill-outline text-decoration-none"><i class="bi bi-github"></i> Github</a>
-                    </div>
-
-                    <div>
-                        <p class="small fw-bold mb-2 text-uppercase ls-1" style="color: var(--text-dim);">Sering Pakai:</p>
-                        <div>
-                            <span class="skill-pill">Laravel</span>
-                            <span class="skill-pill">C++</span>
-                            <span class="skill-pill">Python</span>
-                            <span class="skill-pill">CasaOS</span>
-                            <span class="skill-pill">Ubuntu</span>
+    <div class="container pt-5 mt-lg-5" style="max-width: 1000px;">
+        <div class="row align-items-center g-5 min-vh-75">
+            <div class="col-lg-7 order-2 order-lg-1" data-aos="fade-right">
+                <h1 class="display-3 fw-bolder mb-3">
+                    Halo, Saya <span class="text-neon">Rahmad!</span>
+                </h1>
+                <p class="fs-5 mb-4 text-white-50" style="line-height: 1.6;">
+                    Mahasiswa Teknik Informatika yang berfokus pada <span class="text-info">Backend Development</span> dan pengelolaan <span class="text-warning">Linux Server</span>. 
+                    Membangun sistem yang efisien adalah prioritas saya.
+                </p>
+                <div class="d-flex gap-3 mb-5">
+                    <a href="/about" class="btn-neon text-decoration-none">Profil Saya</a>
+                    <a href="/projects" class="btn btn-outline-light px-4 py-2 border-secondary rounded-3 text-decoration-none">Projects Saya</a>
+                </div>
+                <div class="row g-3">
+                    <div class="col-sm-6">
+                        <div class="lofi-card p-3 d-flex align-items-center gap-3">
+                            <i class="bi bi-code-slash fs-3 text-info"></i>
+                            <span class="small fw-bold text-white">Web Development</span>
                         </div>
                     </div>
-                </div>
-
-                <div class="col-lg-5 order-1 order-lg-2 text-center" data-aos="zoom-in">
-                    <div class="position-relative d-inline-block">
-                        <div style="position: absolute; top: 20%; left: 20%; width: 60%; height: 60%; background: var(--accent-color); filter: blur(80px); opacity: 0.5; z-index: -1;"></div>
-                        
-                        <img src="{{ asset('img/foto-profil.png') }}" class="img-fluid profile-img" style="width: 320px; height: 320px; object-fit: cover;" alt="Alvian">
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="row mt-5 g-4">
-                <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
-                    <div class="lofi-card d-flex align-items-center gap-3 py-4">
-                        <i class="bi bi-hdd-rack fs-2" style="color: var(--accent-color);"></i>
-                        <div>
-                            <h5 class="fw-bold mb-1 text-white">Server Lab</h5>
-                            <p class="small mb-0" style="color: var(--text-body);">Ngoprek Proxmox & IoT</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
-                    <div class="lofi-card d-flex align-items-center gap-3 py-4">
-                        <i class="bi bi-geo-alt fs-2 text-warning"></i>
-                        <div>
-                            <h5 class="fw-bold mb-1 text-white">Lokasi</h5>
-                            <p class="small mb-0" style="color: var(--text-body);">Surakarta, Jawa Tengah</p>
+                    <div class="col-sm-6">
+                        <div class="lofi-card p-3 d-flex align-items-center gap-3">
+                            <i class="bi bi-cpu fs-3 text-purple" style="color: var(--accent-purple);"></i>
+                            <span class="small fw-bold text-white">Server Management</span>
                         </div>
                     </div>
                 </div>
             </div>
-
+            <div class="col-lg-5 order-1 order-lg-2 text-center" data-aos="zoom-in">
+                <div class="profile-container">
+                    <img src="{{ asset('img/foto-profil.png') }}" class="img-fluid profile-img" style="width: 320px; height: 320px; object-fit: cover;" alt="Rahmad Alvian">
+                </div>
+            </div>
         </div>
+    </div>
 
-        <nav class="chill-nav">
-            <a href="/home" class="nav-item-chill active"><i class="bi bi-house-door"></i></a>
-            <a href="/about" class="nav-item-chill"><i class="bi bi-person"></i></a>
-            <a href="/kontak" class="nav-item-chill"><i class="bi bi-chat-dots"></i></a>
-        </nav>
+    <nav class="chill-nav">
+        <a href="/home" class="nav-item {{ request()->is('home') ? 'active' : '' }}">Home</a>
+        <a href="/about" class="nav-item {{ request()->is('about') ? 'active' : '' }}">About</a>
+        <a href="/dashboard" class="nav-item {{ request()->is('dashboard') ? 'active' : '' }}">Dashboard</a>
+        <a href="/projects" class="nav-item {{ request()->is('projects') ? 'active' : '' }}">Project</a>
+        <a href="/kontak" class="nav-item {{ request()->is('kontak') ? 'active' : '' }}">Contact</a>
+    </nav>
 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-        <script> AOS.init(); </script>
-    </body>
-    </html>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script> AOS.init({ duration: 1000, once: true }); </script>
+</body>
+</html>
